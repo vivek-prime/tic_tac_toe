@@ -1,10 +1,10 @@
 package models;
 
-import lombok.Getter;
+import lombok.Data;
 
 import java.util.Arrays;
 
-@Getter
+@Data
 public class Board {
     private int boardSize;
     private Character[][] board;

@@ -1,20 +1,19 @@
 package service;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import models.Board;
 import models.Grid;
 
 import static models.Grid.getGridFromStringInput;
 
+@AllArgsConstructor
+@Getter
 public class BoardServiceImpl implements BoardService {
     private Board board;
 
     @Override
-    public void registerBoard(Board board) {
-        this.board = board;
-    }
-
-    @Override
-    public boolean checkWinner(char symbol) {
+    public boolean getWinner(char symbol) {
         int count, count2;
         Character[][] board = this.board.getBoard();
         int boardSize = this.board.getBoardSize();

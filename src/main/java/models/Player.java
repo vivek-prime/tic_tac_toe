@@ -5,7 +5,12 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public abstract class Player {
+public class Player {
     private String playerId;
     private Symbol symbol;
+    private PlayerType playerType;
+
+    public String getGridCoOrdinates() {
+        return null;
+    }
 }
