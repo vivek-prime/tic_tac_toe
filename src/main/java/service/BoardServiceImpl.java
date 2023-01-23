@@ -14,8 +14,45 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public boolean checkWinner() {
-        return false;
+    public boolean checkWinner(char symbol) {
+        int count, count2;
+        Character[][] board = this.board.getBoard();
+        int boardSize = this.board.getBoardSize();
+
+//        check row
+        for (int i = 0; i < boardSize; i++) {
+            count = 0;
+            for (int j = 0; j < boardSize; j++) {
+                if (board[i][j] == symbol)
+                    count++;
+            }
+            if (count == boardSize)
+                return true;
+        }
+
+//        check column
+        for (int i = 0; i < boardSize; i++) {
+            count = 0;
+            for (int j = 0; j < boardSize; j++) {
+                if (board[j][i] == symbol)
+                    count++;
+            }
+            if (count == boardSize)
+                return true;
+        }
+
+//        check diagonals
+        count = 0;
+        count2 = 0;
+        for (int i = 0; i < boardSize; i++) {
+            for (int j = 0; j < boardSize; j++) {
+                if (i == j && board[i][j] == symbol)
+                    count++;
+                if ((i + j == boardSize - 1) && board[i][j] == symbol)
+                    count2++;
+            }
+        }
+        return count == 3 || count2 == 3;
     }
 
     @Override

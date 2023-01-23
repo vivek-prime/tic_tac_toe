@@ -11,5 +11,5 @@ public interface GameService {
 
     void updateBoard(Player curPlayer, String userInput);
 
-    boolean checkWinner();
+    boolean checkWinner(Player curPlayer);
 }

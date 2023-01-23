@@ -24,7 +24,7 @@ public class GameServiceImpl implements GameService {
         boardService.updateBoard(userInput, curPlayer.getSymbol().getValue());
     }
 
-    public boolean checkWinner() {
-        return boardService.checkWinner();
+    public boolean checkWinner(Player curPlayer) {
+        return boardService.checkWinner(curPlayer.getSymbol().getValue());
     }
 }

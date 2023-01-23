@@ -1,11 +1,11 @@
 package models;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
-@Builder
-public class Player {
+@AllArgsConstructor
+public abstract class Player {
     private String playerId;
     private Symbol symbol;
 }

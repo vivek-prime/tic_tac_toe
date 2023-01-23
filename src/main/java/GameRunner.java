@@ -1,4 +1,5 @@
 import models.Board;
+import models.HumanPlayer;
 import models.Player;
 import models.Symbol;
 import service.BoardService;
@@ -16,8 +17,8 @@ public class GameRunner {
     public static void main(String[] args) {
 //        create Players List
         List<Player> playerList = new ArrayList<>();
-        playerList.add(Player.builder().playerId("P1").symbol(Symbol.ZERO).build());
-        playerList.add(Player.builder().playerId("P2").symbol(Symbol.Cross).build());
+        playerList.add(new HumanPlayer("P1", Symbol.ZERO));
+        playerList.add(new HumanPlayer("P2", Symbol.Cross));
 
 //        create board
         int boardSize = 3;
@@ -45,7 +46,7 @@ public class GameRunner {
                     break;
             }
             gameService.updateBoard(curPlayer, userInput);
-            winnerFlag = gameService.checkWinner();
+            winnerFlag = gameService.checkWinner(curPlayer);
             if (winnerFlag) {
                 System.out.println(curPlayer.getPlayerId() + " wins");
                 break;
