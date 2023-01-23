@@ -1,12 +1,11 @@
 package models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public abstract class Player implements Move {
-    int playerId;
+@Getter
+@Builder
+public class Player {
+    private String playerId;
+    private Symbol symbol;
 }

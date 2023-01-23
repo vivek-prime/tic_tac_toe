@@ -1,11 +1,13 @@
 package models;
 
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+import java.util.Arrays;
+
+@Getter
 public class Board {
     private int boardSize;
-    private int board[][];
+    private Character[][] board;
 
     public Board(int boardSize) {
         this.boardSize = boardSize;
@@ -14,18 +16,9 @@ public class Board {
 
     private void initializeBoard(int boardSize) {
         for (int i = 0; i < boardSize; i++)
-            board[i] = new int[boardSize];
+            board[i] = new Character[boardSize];
         for (int i = 0; i < boardSize; i++) {
-            for (int j = 0; j < board[i].length; j++)
-                board[i][j] = -1;
+            Arrays.fill(board[i], '*');
         }
-    }
-
-    public void displayBoard() {
-
-    }
-
-    public void checkWinner() {
-
     }
 }
