@@ -15,8 +15,7 @@ public class Board {
     }
 
     private void initializeBoard(int boardSize) {
-        for (int i = 0; i < boardSize; i++)
-            board[i] = new Character[boardSize];
+        board = new Character[boardSize][boardSize];
         for (int i = 0; i < boardSize; i++) {
             Arrays.fill(board[i], '*');
         }

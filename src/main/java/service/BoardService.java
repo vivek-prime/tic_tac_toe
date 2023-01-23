@@ -10,4 +10,6 @@ public interface BoardService {
     void updateBoard(String userInput, char value);
 
     boolean checkInput(String userInput);
+
+    void displayBoard();
 }

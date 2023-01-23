@@ -12,4 +12,6 @@ public interface GameService {
     void updateBoard(Player curPlayer, String userInput);
 
     boolean checkWinner(Player curPlayer);
+
+    void displayBoard();
 }

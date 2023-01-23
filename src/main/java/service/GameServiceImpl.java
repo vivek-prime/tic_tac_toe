@@ -27,4 +27,9 @@ public class GameServiceImpl implements GameService {
     public boolean checkWinner(Player curPlayer) {
         return boardService.checkWinner(curPlayer.getSymbol().getValue());
     }
+
+    @Override
+    public void displayBoard() {
+        boardService.displayBoard();
+    }
 }

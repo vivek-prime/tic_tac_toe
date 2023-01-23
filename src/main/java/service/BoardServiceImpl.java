@@ -63,11 +63,29 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public boolean checkInput(String userInput) {
-        Grid grid = getGridFromStringInput(userInput);
+        Grid grid;
+        try {
+            grid = getGridFromStringInput(userInput);
+        } catch (Exception e) {
+            System.out.println("Exception : " + e.getMessage());
+            return false;
+        }
         int x = grid.getX();
         int y = grid.getY();
-        return (x >= 1 && x <= board.getBoardSize()) &&
-                (y >= 1 && y <= board.getBoardSize()) &&
+        return (x >= 0 && x < board.getBoardSize()) &&
+                (y >= 0 && y < board.getBoardSize()) &&
                 board.getBoard()[x][y] == '*';
+    }
+
+    @Override
+    public void displayBoard() {
+        Character[][] board = this.board.getBoard();
+        int boardSize = this.board.getBoardSize();
+        for (int i = 0; i < boardSize; i++) {
+            for (int j = 0; j < boardSize; j++) {
+                System.out.print(board[i][j] + " - ");
+            }
+            System.out.println();
+        }
     }
 }

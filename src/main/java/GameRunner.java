@@ -38,11 +38,12 @@ public class GameRunner {
         boolean winnerFlag = false;
 
         while (MAX_TURNS >= 0) {
+            gameService.displayBoard();
             curPlayer = playerList.get(turn);
             while (true) {
                 System.out.println(USER_INPUT_STRING);
                 userInput = sc.nextLine();
-                if (!gameService.checkInput(userInput))
+                if (gameService.checkInput(userInput))
                     break;
             }
             gameService.updateBoard(curPlayer, userInput);
