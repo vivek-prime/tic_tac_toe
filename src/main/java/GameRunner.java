@@ -1,3 +1,4 @@
+import exception.InvalidGridInputException;
 import models.*;
 import service.BoardServiceImpl;
 import service.DisplayResultService;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameRunner {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InvalidGridInputException {
 //        create Players List
         List<Player> playerList = new ArrayList<>();
         playerList.add(new Player("P1", Symbol.ZERO, PlayerType.HUMAN));

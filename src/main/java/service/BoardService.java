@@ -1,5 +1,6 @@
 package service;
 
+import exception.InvalidGridInputException;
 import models.Board;
 
 public interface BoardService {
@@ -7,7 +8,7 @@ public interface BoardService {
 
     void updateBoard(String userInput, char value);
 
-    boolean checkInput(String userInput);
+    boolean checkInput(String userInput) throws InvalidGridInputException;
 
     void displayBoard();
 

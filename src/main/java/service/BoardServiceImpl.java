@@ -1,5 +1,6 @@
 package service;
 
+import exception.InvalidGridInputException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import models.Board;
@@ -61,19 +62,22 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public boolean checkInput(String userInput) {
+    public boolean checkInput(String userInput) throws InvalidGridInputException {
         Grid grid;
         try {
             grid = getGridFromStringInput(userInput);
-        } catch (Exception e) {
-            System.out.println("Exception : " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println(e);
             return false;
         }
         int x = grid.getX();
         int y = grid.getY();
-        return (x >= 0 && x < board.getBoardSize()) &&
+        boolean flag = (x >= 0 && x < board.getBoardSize()) &&
                 (y >= 0 && y < board.getBoardSize()) &&
                 board.getBoard()[x][y] == '*';
+        if (!flag)
+            throw new InvalidGridInputException("Invalid Input");
+        return flag;
     }
 
     @Override

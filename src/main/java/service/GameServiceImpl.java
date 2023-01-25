@@ -1,5 +1,6 @@
 package service;
 
+import exception.InvalidGridInputException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import models.GameResult;
@@ -7,11 +8,9 @@ import models.GameState;
 import models.Player;
 
 import java.util.List;
-import java.util.Scanner;
 
 import static models.GameState.DRAW;
 import static models.GameState.WINNER;
-import static utils.AppConstants.USER_INPUT_STRING;
 
 @Data
 @AllArgsConstructor
@@ -27,24 +26,19 @@ public class GameServiceImpl implements GameService {
 
         int maxTurns = boardSize * boardSize;
         int turn = 0;
-        Scanner sc = new Scanner(System.in);
-        String input = "";
+        String input;
 
         while (gameState == GameState.STARTED && maxTurns > 0) {
             boardService.displayBoard();
             curPlayer = playersList.get(turn);
-            switch (curPlayer.getPlayerType()) {
-                case HUMAN:
-                    while (true) {
-                        System.out.println(USER_INPUT_STRING + curPlayer.getPlayerId());
-                        input = sc.nextLine();
-                        if (boardService.checkInput(input))
-                            break;
-                    }
-                    break;
-                case COMPUTER:
-                    input = curPlayer.getGridCoOrdinates();
-                    break;
+            while (true) {
+                input = curPlayer.getGridCoOrdinates();
+                try {
+                    if (boardService.checkInput(input))
+                        break;
+                } catch (InvalidGridInputException e) {
+                    System.out.println(e);
+                }
             }
             boardService.updateBoard(input, curPlayer.getSymbol().getValue());
             gameState = boardService.getWinner(curPlayer.getSymbol().getValue()) ? WINNER : gameState;
