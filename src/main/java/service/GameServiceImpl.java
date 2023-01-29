@@ -1,23 +1,42 @@
 package service;
 
 import exception.InvalidGridInputException;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import models.GameResult;
 import models.GameState;
 import models.Player;
 
 import java.util.List;
+import java.util.Scanner;
 
 import static models.GameState.DRAW;
 import static models.GameState.WINNER;
 
 @Data
-@AllArgsConstructor
 public class GameServiceImpl implements GameService {
     private BoardService boardService;
     private List<Player> playersList;
     private GameState gameState;
+    private static GameService instance = null;
+    private Scanner scanner;
+
+    private GameServiceImpl(BoardService boardService, List<Player> playersList, GameState gameState, Scanner scanner) {
+        this.boardService = boardService;
+        this.playersList = playersList;
+        this.gameState = gameState;
+        this.scanner = scanner;
+    }
+
+    public static GameService getInstance(BoardService boardService, List<Player> playersList, GameState gameState, Scanner scanner) {
+        if (instance == null) {
+            synchronized (GameServiceImpl.class) {
+                if (instance == null) {
+                    instance = new GameServiceImpl(boardService, playersList, gameState, scanner);
+                }
+            }
+        }
+        return instance;
+    }
 
     @Override
     public GameResult startGame() {
@@ -32,7 +51,7 @@ public class GameServiceImpl implements GameService {
             boardService.displayBoard();
             curPlayer = playersList.get(turn);
             while (true) {
-                input = curPlayer.getGridCoOrdinates();
+                input = curPlayer.getGridCoOrdinates(scanner);
                 try {
                     if (boardService.checkInput(input))
                         break;
