@@ -14,9 +14,8 @@ public class Player {
     private Symbol symbol;
     private PlayerType playerType;
 
-    public String getGridCoOrdinates() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println(USER_INPUT_STRING);
-        return sc.nextLine();
+    public String getGridCoOrdinates(Scanner scanner) {
+        System.out.println(USER_INPUT_STRING + playerId);
+        return scanner.nextLine();
     }
 }
